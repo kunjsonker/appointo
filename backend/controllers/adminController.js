@@ -1,5 +1,5 @@
 import validator from "validator";
-import bycrypt from "bcrypt";
+import bcrypt from "bcrypt";
 import { v2 as cloudinary } from "cloudinary";
 import doctorModel from "../models/doctorModel.js";
 import jwt from "jsonwebtoken";
@@ -36,8 +36,8 @@ const addDoctor = async (req, res) => {
 
         // hashing password
 
-        const salt = await bycrypt.genSalt(10);
-        const hashedPassword = await bycrypt.hash(password, salt);
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(password, salt);
 
         //uploading image to cloudinary
 
@@ -124,4 +124,30 @@ const allDoctors = async (req, res) => {
     }
 }
 
-export {addDoctor, loginAdmin, allDoctors};
+const checkAvailability = async (req,res) => {
+
+    try {
+
+        const {docId} = req.body;
+
+        const docData = await doctorModel.findById(docId);
+        await doctorModel.findByIdAndUpdate(docId,{available:!docData.available});
+        res.status(200).json({success:true,message:'Doctor availability updated successfully'});
+
+
+        
+    } catch (error) {
+
+        console.error('Error checking availability:', error);
+        res.status(500).json({success:false,message:error.message});
+        
+    }
+
+   
+
+
+
+
+}
+
+export {addDoctor, loginAdmin, allDoctors,checkAvailability};

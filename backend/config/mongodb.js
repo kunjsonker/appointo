@@ -5,6 +5,7 @@ const connectDB = async () => {
     mongoose.connection.on("connected", () => {
         console.log("MongoDB connected successfully");
     });
+    mongoose.set('strictQuery', false);
     await mongoose.connect(`${process.env.MONGODB_URI}/appointo`);
 
 }
