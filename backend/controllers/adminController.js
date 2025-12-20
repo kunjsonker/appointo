@@ -4,6 +4,7 @@ import { v2 as cloudinary } from "cloudinary";
 import doctorModel from "../models/doctorModel.js";
 import jwt from "jsonwebtoken";
 import appointmentModel from "../models/appointmentModel.js";
+import userModel from "../models/userModel.js";
 
 
 
@@ -160,4 +161,71 @@ const appointmentsAdmin = async (req, res) => {
     }
 }
 
-export {addDoctor, loginAdmin, allDoctors,checkAvailability , appointmentsAdmin};
+// api for appointment cancel
+
+const appointmentCancel = async (req,res) => {
+
+    try {
+
+        const {appointmentId} = req.body;
+        
+
+        const appointmentData = await appointmentModel.findById(appointmentId);
+
+        
+
+        await appointmentModel.findByIdAndUpdate(appointmentId,{cancelled : true});
+
+        // releasing doctor slot
+
+        const {docId,slotDate,slotTime} = appointmentData;
+
+        const doctorData = await doctorModel.findById(docId);
+
+        let slots_booked = doctorData.slots_booked;
+
+        slots_booked[slotDate] = slots_booked[slotDate].filter(e => e != slotTime);
+
+        await doctorModel.findByIdAndUpdate(docId,{slots_booked});
+
+        res.status(200).json({success:true,message:"Appointment cancelled successfully"});
+        
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({success:false,message:error.message});
+        
+    }
+}
+
+const adminDashboard = async (req, res) => {
+    try {
+        const doctors = await doctorModel.countDocuments();
+        const users = await userModel.countDocuments();
+
+        const appointments = await appointmentModel
+            .find({})
+            .sort({ createdAt: -1 })
+            .limit(5)
+            .lean();
+
+        const dashData = {
+            doctors,
+            appointments: await appointmentModel.countDocuments(),
+            patients: users,
+            latestAppointment: appointments
+        };
+
+        res.status(200).json({ success: true, dashData });
+
+    } catch (error) {
+        console.error("Admin dashboard error:", error);
+        res.status(500).json({
+            success: false,
+            message: error.message
+        });
+    }
+};
+
+
+
+export {addDoctor, loginAdmin, allDoctors,checkAvailability , appointmentsAdmin , appointmentCancel , adminDashboard};
