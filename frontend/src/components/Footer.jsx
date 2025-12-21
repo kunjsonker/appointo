@@ -9,7 +9,7 @@ const Footer = () => {
             {/* Left Section */}
             <div>
                 <img className='mb-5 w-40' src={assets.logo} alt="" />
-                <p className='w-full md:w-2/3 text-gray-600 leading-6'>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Et soluta dolores deserunt cupiditate, magnam architecto consequatur quis vitae dolorem accusamus iste provident iure nostrum in, sed animi dolore veniam dicta?</p>
+                <p className='w-full md:w-2/3 text-gray-600 leading-6'>Connecting patients with top-rated healthcare professionals through seamless scheduling. Experience trusted medical care at your fingertips. Your health is our priority, ensuring secure, reliable, and effortless doctor appointments every day.</p>
             </div>
 
             {/* Center Section */}
