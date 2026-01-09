@@ -23,6 +23,10 @@ app.use(cors());
 
 // api endpoints
 
+app.get('/health', (req, res) => {
+    res.status(200).send('Server is awake');
+  });
+
 app.use('/api/admin',adminRouter);
 app.use('/api/doctor',doctorRouter);
 app.use('/api/user',userRouter)

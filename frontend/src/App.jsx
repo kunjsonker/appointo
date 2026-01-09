@@ -11,9 +11,24 @@ import Appointment from './pages/Appointment'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import { ToastContainer} from 'react-toastify';
-
+import {useContext} from 'react'
+import { AppContext } from './context/AppContext';
 
 const App = () => {
+
+  const { isServerReady } = useContext(AppContext);
+
+  if (!isServerReady) {
+    return (
+        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50">
+            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary mb-4"></div>
+            <h1 className="text-xl font-medium text-gray-700">Waking up the server...</h1>
+            <p className="text-gray-500 mt-2">This may take up to 60 seconds on the free tier.</p>
+        </div>
+    );
+}
+
+
   return (
     <div className='mx-4 sm:mx-[10%]'>
       <ToastContainer/>

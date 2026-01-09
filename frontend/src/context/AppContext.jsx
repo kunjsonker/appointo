@@ -16,6 +16,25 @@ const AppContextProvider = (props) => {
 
     const [userData,setUserData] = useState(false);
 
+    const [isServerReady, setIsServerReady] = useState(false);
+    // const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
+
+    const checkServerHealth = async () => {
+        try {
+            // Ping the health endpoint
+            await axios.get(`${backendUrl}/health`);
+            setIsServerReady(true);
+        } catch (error) {
+            console.log("Server is still waking up...");
+            // Retry after a short delay if it fails (optional)
+            setTimeout(checkServerHealth, 3000);
+        }
+    };
+    useEffect(() => {
+        checkServerHealth();
+    }, []);
+
 
     
     const getDoctorsData = async () => {
@@ -54,7 +73,7 @@ const AppContextProvider = (props) => {
     }
 
     const value = {
-        doctors,getDoctorsData,currencySymbol,token,setToken,backendUrl,userData,setUserData,loadUserProfileData
+        doctors,getDoctorsData,currencySymbol,token,setToken,backendUrl,userData,setUserData,loadUserProfileData,isServerReady
 
     };
 
