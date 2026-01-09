@@ -23,7 +23,7 @@ const App = () => {
         <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50">
             <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary mb-4"></div>
             <h1 className="text-xl font-medium text-gray-700">Waking up the server...</h1>
-            <p className="text-gray-500 mt-2">This may take up to 60 seconds on the free tier.</p>
+            <p className="text-gray-500 mt-2">This may take up to 60 seconds.Please Wait 😊</p>
         </div>
     );
 }
