@@ -63,3 +63,62 @@ Appointo is a robust healthcare management platform designed to connect patients
 ```bash
 git clone [https://github.com/kunjsonker/appointo.git](https://github.com/kunjsonker/appointo.git)
 cd appointo
+
+2. Configure Environment Variables
+
+Create a .env file in the /backend folder:
+
+Code snippet
+MONGODB_URI=your_mongodb_uri
+CLOUDINARY_NAME=your_name
+CLOUDINARY_API_KEY=your_key
+CLOUDINARY_SECRET_KEY=your_secret
+JWT_SECRET=super_secret_key
+ADMIN_EMAIL=admin@appointo.com
+ADMIN_PASSWORD=admin_password
+STRIPE_SECRET_KEY=your_stripe_key
+RAZORPAY_KEY_ID=your_razorpay_id
+RAZORPAY_KEY_SECRET=your_razorpay_secret
+3. Run the Application
+
+You will need 3 terminal windows to run the full ecosystem:
+
+Terminal 1: Server
+
+Bash
+cd backend && npm install && npm run server
+Terminal 2: User Frontend
+
+Bash
+cd frontend && npm install && npm run dev
+Terminal 3: Admin Dashboard
+
+Bash
+cd admin && npm install && npm run dev
+📂 Project Structure
+Plaintext
+appointo/
+├── admin/          # Admin & Doctor Dashboard (React)
+├── backend/        # Express API, Models, and Middlewares
+│   ├── config/     # Database & Cloudinary setup
+│   ├── controllers/# Route handlers
+│   └── routes/     # API Endpoints
+├── frontend/       # Patient-facing web application
+└── README.md
+🤝 Contributing
+Contributions make the open-source community an amazing place to learn and create.
+
+Fork the Project
+
+Create your Feature Branch (git checkout -b feature/AmazingFeature)
+
+Commit your Changes (git commit -m 'Add some AmazingFeature')
+
+Push to the Branch (git push origin feature/AmazingFeature)
+
+Open a Pull Request
+
+📄 License
+Distributed under the MIT License. See LICENSE for more information.
+
+<div align="center"> <br /> Made with ❤️ by <a href="https://www.google.com/search?q=https://github.com/kunjsonker">Kunj Sonker</a> </div>
