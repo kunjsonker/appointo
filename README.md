@@ -1,7 +1,7 @@
 # appointo
 
-<div align="center">
-  <img src="./frontend/src/assets/logo.svg" alt="Appointo Logo" width="200" />
+<!-- <div align="center">
+  <img src="./frontend/src/assets/logo.svg" alt="Appointo Logo" width="200" /> -->
 
   # 🩺 Appointo
   **The Complete MERN Stack Doctor Appointment Ecosystem**
